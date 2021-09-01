@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'explosion_exception.dart';
 
 class Field {
@@ -46,7 +45,7 @@ class Field {
     }
   }
 
-  void revealBombs() {
+  void revealBomb() {
     if (_mined) {
       _opened = true;
     }
