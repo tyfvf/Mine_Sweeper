@@ -1,16 +1,9 @@
 # mine_sweeper
 
-A new Flutter project.
+A simple mine sweeper game, just to practice some logic, prehaps i add some more features in the future, like a difficulty option.
+The basics of mine sweeper is here the flags, the numbers, a happy face if you win and a sad face if you don't, if you wish to restart just press the face
 
-## Getting Started
+## A little showcase:
 
-This project is a starting point for a Flutter application.
+![giphy](https://user-images.githubusercontent.com/75546113/131773388-7b3d3b09-711e-47b3-aa8b-2579213e939e.gif)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
