@@ -1,4 +1,4 @@
-# mine_sweeper
+# Mine Sweeper
 
 A simple mine sweeper game, just to practice some logic, prehaps i add some more features in the future, like a difficulty option.
 The basics of mine sweeper is here the flags, the numbers, a happy face if you win and a sad face if you don't, if you wish to restart just press the face
