@@ -71,6 +71,7 @@ class _MineSweeperAppState extends State<MineSweeperApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: ResultWidget(
           win: _win,
