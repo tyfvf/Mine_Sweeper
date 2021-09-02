@@ -12,48 +12,60 @@ class MineSweeperApp extends StatefulWidget {
 
 class _MineSweeperAppState extends State<MineSweeperApp> {
   bool? _win;
-  Board _board = Board(
-    lines: 12,
-    columns: 12,
-    amntBombs: 3,
-  );
+  Board? _board;
 
   void _restart() {
     setState(() {
       _win = null;
-      _board.restart();
+      _board!.restart();
     });
   }
 
   void _open(Field field) {
     if (_win != null) {
-        return;
-      }
-    
+      return;
+    }
+
     setState(() {
       try {
         field.open();
-        if (_board.resolved) {
+        if (_board!.resolved) {
           _win = true;
         }
       } on ExplosionException {
         _win = false;
-        _board.revealBombs();
+        _board!.revealBombs();
       }
     });
   }
 
   void _alterMark(Field field) {
     if (_win != null) {
-        return;
-      }
+      return;
+    }
 
     setState(() {
       field.alterMark();
-      if (_board.resolved) {
+      if (_board!.resolved) {
         _win = true;
       }
     });
+  }
+
+  Board? _getBoard(double width, double height) {
+    if (_board == null) {
+      int amntColumns = 15;
+      double fieldSize = width / amntColumns;
+      int amntLines = (height / fieldSize).floor();
+
+      _board = Board(
+        lines: amntLines,
+        columns: amntColumns,
+        amntBombs: 30,
+      );
+    }
+
+    return _board;
   }
 
   @override
@@ -65,12 +77,16 @@ class _MineSweeperAppState extends State<MineSweeperApp> {
           onRestart: _restart,
         ),
         body: Container(
-          child: BoardWidget(
-            board: _board,
-            onOpen: _open,
-            onAlterMark: _alterMark,
-          ),
-        ),
+            color: Colors.grey,
+            child: LayoutBuilder(
+              builder: (ctx, constraints) {
+                return BoardWidget(
+                  board: _getBoard(constraints.maxWidth, constraints.maxHeight),
+                  onAlterMark: _alterMark,
+                  onOpen: _open,
+                );
+              },
+            )),
       ),
     );
   }

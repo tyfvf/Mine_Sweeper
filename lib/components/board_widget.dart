@@ -4,7 +4,7 @@ import 'package:mine_sweeper/models/board.dart';
 import 'package:mine_sweeper/models/field.dart';
 
 class BoardWidget extends StatelessWidget {
-  final Board board;
+  final Board? board;
   final void Function(Field) onOpen;
   final void Function(Field) onAlterMark;
 
@@ -18,8 +18,8 @@ class BoardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: GridView.count(
-        crossAxisCount: board.columns,
-        children: board.fields.map((f) {
+        crossAxisCount: board!.columns,
+        children: board!.fields.map((f) {
           return FieldWidget(
             field: f,
             onOpen: onOpen,
