@@ -4,7 +4,19 @@ import 'package:mine_sweeper/components/result_widget.dart';
 import 'package:mine_sweeper/models/board.dart';
 import 'package:mine_sweeper/models/field.dart';
 
-class MineSweeperApp extends StatelessWidget {
+class MineSweeperApp extends StatefulWidget {
+  @override
+  _MineSweeperAppState createState() => _MineSweeperAppState();
+}
+
+class _MineSweeperAppState extends State<MineSweeperApp> {
+  bool? _win;
+  Board _board = Board(
+    lines: 12,
+    columns: 12,
+    amntBombs: 3,
+  );
+
   void _restart() {
     print("restart");
   }
@@ -22,12 +34,12 @@ class MineSweeperApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: ResultWidget(
-          win: false,
+          win: _win,
           onRestart: _restart,
         ),
         body: Container(
           child: BoardWidget(
-            board: Board(lines: 15,columns: 15,amntBombs: 10),
+            board: _board,
             onOpen: _open,
             onAlterMark: _alterMark,
           ),
