@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'field.dart';
 
-class Table {
+class Board {
   final int lines;
   final int columns;
   final int amntBombs;
 
   final List<Field> _fields = [];
 
-  Table({
+  Board({
     required this.lines,
     required this.columns,
     required this.amntBombs,
