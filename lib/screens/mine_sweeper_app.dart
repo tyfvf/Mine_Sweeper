@@ -6,11 +6,19 @@ import 'package:mine_sweeper/models/explosion_exception.dart';
 import 'package:mine_sweeper/models/field.dart';
 
 class MineSweeperApp extends StatefulWidget {
+  final int amntOfBombs;
+
+  MineSweeperApp(this.amntOfBombs);
+
   @override
-  _MineSweeperAppState createState() => _MineSweeperAppState();
+  _MineSweeperAppState createState() => _MineSweeperAppState(amntOfBombs);
 }
 
 class _MineSweeperAppState extends State<MineSweeperApp> {
+  final int amntOfBombs;
+
+  _MineSweeperAppState(this.amntOfBombs);
+
   bool? _win;
   Board? _board;
 
@@ -61,7 +69,7 @@ class _MineSweeperAppState extends State<MineSweeperApp> {
       _board = Board(
         lines: amntLines,
         columns: amntColumns,
-        amntBombs: 30,
+        amntBombs: amntOfBombs,
       );
     }
 
@@ -70,25 +78,22 @@ class _MineSweeperAppState extends State<MineSweeperApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: ResultWidget(
-          win: _win,
-          onRestart: _restart,
-        ),
-        body: Container(
-            color: Colors.grey,
-            child: LayoutBuilder(
-              builder: (ctx, constraints) {
-                return BoardWidget(
-                  board: _getBoard(constraints.maxWidth, constraints.maxHeight),
-                  onAlterMark: _alterMark,
-                  onOpen: _open,
-                );
-              },
-            )),
+    return Scaffold(
+      appBar: ResultWidget(
+        win: _win,
+        onRestart: _restart,
       ),
+      body: Container(
+          color: Colors.grey,
+          child: LayoutBuilder(
+            builder: (ctx, constraints) {
+              return BoardWidget(
+                board: _getBoard(constraints.maxWidth, constraints.maxHeight),
+                onAlterMark: _alterMark,
+                onOpen: _open,
+              );
+            },
+          )),
     );
   }
 }

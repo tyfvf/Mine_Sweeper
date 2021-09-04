@@ -1,6 +1,8 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:mine_sweeper/screens/home_screen.dart';
 
-class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
+class ResultWidget extends StatefulWidget implements PreferredSizeWidget {
   final bool? win;
   final Function()? onRestart;
 
@@ -9,10 +11,18 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
     required this.onRestart,
   });
 
+  @override
+  _ResultWidgetState createState() => _ResultWidgetState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(120);
+}
+
+class _ResultWidgetState extends State<ResultWidget> {
   Color? _getColor() {
-    if (win == null) {
+    if (widget.win == null) {
       return Colors.yellow;
-    } else if (win == true) {
+    } else if (widget.win == true) {
       return Colors.green[300];
     } else {
       return Colors.red[300];
@@ -20,9 +30,9 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 
   IconData _getIcon() {
-    if (win == null) {
+    if (widget.win == null) {
       return Icons.sentiment_satisfied;
-    } else if (win == true) {
+    } else if (widget.win == true) {
       return Icons.sentiment_very_satisfied;
     } else {
       return Icons.sentiment_very_dissatisfied;
@@ -36,23 +46,35 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
       child: SafeArea(
         child: Container(
           padding: EdgeInsets.all(10),
-          child: CircleAvatar(
-            backgroundColor: _getColor(),
-            child: IconButton(
-              padding: EdgeInsets.all(0),
-              onPressed: onRestart, 
-              icon: Icon(
-                _getIcon(),
-                color: Colors.black,
-                size: 35,
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+                icon: Icon(Icons.arrow_back),
               ),
-            ),
+              Container(
+                margin: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width / 4, 0, 0, 0),
+                child: CircleAvatar(
+                  backgroundColor: _getColor(),
+                  child: IconButton(
+                    padding: EdgeInsets.all(0),
+                    onPressed: widget.onRestart,
+                    icon: Icon(
+                      _getIcon(),
+                      color: Colors.black,
+                      size: 35,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(120);
 }
