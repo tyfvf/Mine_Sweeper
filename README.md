@@ -8,7 +8,7 @@ The basics of mine sweeper is here the flags, the numbers, a happy face if you w
 ![giphy](https://user-images.githubusercontent.com/75546113/131773388-7b3d3b09-711e-47b3-aa8b-2579213e939e.gif)
 
 
-## """Update""", it's pretty ugly, prehaps i improve the design in the future
+## """Update""", added difficulty settings, it's pretty ugly, prehaps i improve the design in the future
 
 ### On easy mode (20 bombs)
 
