@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mine_sweeper/screens/home_screen.dart';
@@ -19,6 +20,29 @@ class ResultWidget extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _ResultWidgetState extends State<ResultWidget> {
+  int time = 0;
+
+  Timer _timer = Timer(Duration(seconds: 1), () {});
+
+  @override
+  void initState() {
+    super.initState();
+
+    countTime();
+  }
+
+  void countTime() {
+    time = 0;
+    _timer = Timer.periodic(
+      Duration(seconds: 1),
+      (timer) {
+        setState(() {
+          time += 1;
+        });
+      },
+    );
+  }
+
   Color? _getColor() {
     if (widget.win == null) {
       return Colors.yellow;
@@ -33,8 +57,10 @@ class _ResultWidgetState extends State<ResultWidget> {
     if (widget.win == null) {
       return Icons.sentiment_satisfied;
     } else if (widget.win == true) {
+      _timer.cancel();
       return Icons.sentiment_very_satisfied;
     } else {
+      _timer.cancel();
       return Icons.sentiment_very_dissatisfied;
     }
   }
@@ -47,6 +73,7 @@ class _ResultWidgetState extends State<ResultWidget> {
         child: Container(
           padding: EdgeInsets.all(10),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 onPressed: () {
@@ -55,22 +82,29 @@ class _ResultWidgetState extends State<ResultWidget> {
                 },
                 icon: Icon(Icons.arrow_back),
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    MediaQuery.of(context).size.width / 4, 0, 0, 0),
-                child: CircleAvatar(
-                  backgroundColor: _getColor(),
-                  child: IconButton(
-                    padding: EdgeInsets.all(0),
-                    onPressed: widget.onRestart,
-                    icon: Icon(
-                      _getIcon(),
-                      color: Colors.black,
-                      size: 35,
-                    ),
+              CircleAvatar(
+                backgroundColor: _getColor(),
+                child: IconButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {
+                    countTime();
+                    widget.onRestart!();
+                  },
+                  icon: Icon(
+                    _getIcon(),
+                    color: Colors.black,
+                    size: 35,
                   ),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(right: 10),
+                child: Text(
+                  "${time.toString()} sec",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              )
             ],
           ),
         ),
