@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mine_sweeper/screens/connection.dart';
 import 'package:mine_sweeper/screens/mine_sweeper_app.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -52,11 +53,23 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 300),
+              margin: EdgeInsets.only(top: 250),
               child: Text(
-                "Choose Difficulty",
+                "See HighScore",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.w100),
               ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Connection()));
+              }, 
+              child: Text("HIGHSCORES"),
+              style: TextButton.styleFrom(primary: Colors.green[900]),
+            ),
+            Text(
+                "Choose Difficulty",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w100),
             ),
             DropdownButton<String>(
               value: value,
@@ -86,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ? TextStyle(color: Colors.yellow, fontWeight: FontWeight.bold)
               : item == "Hard"
                   ? TextStyle(color: Colors.red, fontWeight: FontWeight.bold)
-                  : TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                  : TextStyle(color: Colors.green[900], fontWeight: FontWeight.bold),
         ),
       );
 }

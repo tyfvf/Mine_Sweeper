@@ -1,15 +1,19 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:mine_sweeper/models/score.dart';
+import 'package:mine_sweeper/repository/scoredb_repository.dart';
 import 'package:mine_sweeper/screens/home_screen.dart';
 
 class ResultWidget extends StatefulWidget implements PreferredSizeWidget {
   final bool? win;
   final Function()? onRestart;
+  final int amntOfBombs;
 
   ResultWidget({
     required this.win,
     required this.onRestart,
+    required this.amntOfBombs,
   });
 
   @override
@@ -21,6 +25,11 @@ class ResultWidget extends StatefulWidget implements PreferredSizeWidget {
 
 class _ResultWidgetState extends State<ResultWidget> {
   int time = 0;
+  late String difficulty = widget.amntOfBombs == 40
+      ? "Medium"
+      : widget.amntOfBombs == 70
+          ? "Hard"
+          : "Easy";
 
   Timer _timer = Timer(Duration(seconds: 1), () {});
 
@@ -57,6 +66,14 @@ class _ResultWidgetState extends State<ResultWidget> {
     if (widget.win == null) {
       return Icons.sentiment_satisfied;
     } else if (widget.win == true) {
+      Score score = Score(
+        seconds: time,
+        difficulty: difficulty,
+      );
+
+      var repository = ScoreDBRepository();
+      repository.insert(score);
+
       _timer.cancel();
       return Icons.sentiment_very_satisfied;
     } else {

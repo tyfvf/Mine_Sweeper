@@ -82,6 +82,7 @@ class _MineSweeperAppState extends State<MineSweeperApp> {
       appBar: ResultWidget(
         win: _win,
         onRestart: _restart,
+        amntOfBombs: amntOfBombs,
       ),
       body: Container(
           color: Colors.grey,
