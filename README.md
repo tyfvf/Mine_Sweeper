@@ -17,3 +17,11 @@ The basics of mine sweeper is here: the flags, the numbers, a happy face if you 
 ### On hard mode (70 bombs (medium has 40))
 
 ![giphy](https://user-images.githubusercontent.com/75546113/132085968-d1cbc1b8-87d2-48ba-b903-a24cb7df645f.gif)
+
+
+## New ""Update"", added a highscore section for you to track your fastest time beating a difficulty
+
+![giphy](https://user-images.githubusercontent.com/75546113/133365998-ec8eefd2-2737-4e27-b726-99138cc1b427.gif)
+
+
+PS: I won't work more on this project because it already has too many things for such a simple app, this is the final commit.
